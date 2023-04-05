@@ -46,6 +46,9 @@ app.get('/makeList/*', function(req, res) {
 
 app.post('/makeList', function(req, res) {
   // Add your code here
+  console.log("yay");
+  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  /*
   console.log("reached to post req");
   const result = req.body;
   const mysql = require('mysql');
@@ -68,7 +71,7 @@ app.post('/makeList', function(req, res) {
     });
     con.end();
   });
-
+*/
   
 });
 
