@@ -22,7 +22,7 @@
         },
         "makeList": {
           "deploymentBucketName": "amplify-test-dev-20955-deployment",
-          "s3Key": "amplify-builds/makeList-78495a3357343033642f-build.zip"
+          "s3Key": "amplify-builds/makeList-62524d38516d56724138-build.zip"
         }
       },
       "api": {

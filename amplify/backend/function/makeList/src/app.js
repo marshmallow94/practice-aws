@@ -46,8 +46,10 @@ app.get('/makeList/*', function(req, res) {
 
 app.post('/makeList', function(req, res) {
   // Add your code here
+  console.log("reached to post req");
   const result = req.body;
   const mysql = require('mysql');
+  console.log(req.body);
 
   const con = mysql.createConnection({
     host     : "database-1.cwd3greadrvm.us-east-1.rds.amazonaws.com",
@@ -59,6 +61,7 @@ app.post('/makeList', function(req, res) {
   
   con.connect(function(err) {
     if (err) throw err;
+    console.log("reached to connect");
     con.query("INSERT INTO db.LocationList (name, description, is_public, owner_fk)" +
       "VALUES (" + result["name"] +", " + result["description"] + ", 1, 1);", function (err, result, fields) {
       res.json({success: 'send succeeded!', url: req.url, result});
