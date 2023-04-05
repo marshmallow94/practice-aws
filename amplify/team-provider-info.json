@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "testec5c516d": {}
+      },
+      "function": {
+        "search": {
+          "deploymentBucketName": "amplify-test-dev-20955-deployment",
+          "s3Key": "amplify-builds/search-6b6233545834354f6953-build.zip"
+        }
+      },
+      "api": {
+        "search": {}
       }
     }
   }

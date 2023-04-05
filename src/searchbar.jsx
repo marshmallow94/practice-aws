@@ -150,7 +150,7 @@ function SearchBar() {
     //   console.log("This is line 132 of searchbar.jsx");
     // }
     setLoading(true);
-    let myAPI = "api7e5457cb";
+    let myAPI = "search";
     let searchItem = null;
 
     if (selectType === 0){
