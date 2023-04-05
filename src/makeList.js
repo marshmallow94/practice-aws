@@ -31,7 +31,7 @@ function makeList() {
       try {
         console.log("submitted", listName, listDescription);
         console.log(myInit);
-        return await API.post("makeList", "/makeList", myInit);
+        await API.post("makeList", "/makeList", myInit);
 
       } catch (err) {
         console.log(err);
