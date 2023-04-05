@@ -12,7 +12,6 @@ See the License for the specific language governing permissions and limitations 
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
-const mysql = require('mysql');
 
 // declare a new express app
 const app = express()
@@ -31,44 +30,12 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
-app.get('/search/:SearchTerm/:SearchQuery', function(req, res) {
+app.get('/makeList', function(req, res) {
   // Add your code here
-  let searchTerm = req.params.SearchTerm;
-  let searchQuery = req.params.SearchQuery
-
-  const mysql = require('mysql');
-  let resultFromDB = null;
-  const con = mysql.createConnection({
-    host     : "database-1.cwd3greadrvm.us-east-1.rds.amazonaws.com",
-    user     : "admin",
-    password : "922962700",
-    port     : 3306
-  });
-
-  if (searchTerm == 'lists'){
-  con.connect(function(err) {
-    if (err) throw err;
-    con.query("SELECT * FROM db.LocationList WHERE name LIKE '%" + 
-    searchQuery + "%'", function (err, result, fields) {
-      console.log(result);
-      res.json({success: 'get call succeed!', url: req.url, result});
-    });
-    con.end();
-});
-  } else if(searchTerm == 'users') {
-    con.connect(function(err) {
-      if (err) throw err;
-      con.query("SELECT * FROM db.PersonalUser WHERE username LIKE '%" + 
-      searchQuery + "%'", function (err, result, fields) {
-        console.log(result);
-        res.json({success: 'get call succeed!', url: req.url, result});
-      });
-      con.end();
-  });
-  }
+  res.json({success: 'get call succeed!', url: req.url});
 });
 
-app.get('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
+app.get('/makeList/*', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!', url: req.url});
 });
@@ -77,12 +44,32 @@ app.get('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
 * Example post method *
 ****************************/
 
-app.post('/search/:SearchTerm/:SearchQuery', function(req, res) {
+app.post('/makeList', function(req, res) {
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  const result = req.body;
+  const mysql = require('mysql');
+
+  const con = mysql.createConnection({
+    host     : "database-1.cwd3greadrvm.us-east-1.rds.amazonaws.com",
+    user     : "admin",
+    password : "922962700",
+    port     : 3306
+  });
+
+  
+  con.connect(function(err) {
+    if (err) throw err;
+    con.query("INSERT INTO db.LocationList (name, description, is_public, owner_fk)" +
+      "VALUES (" + result["name"] +", " + result["description"] + ", 1, 1);", function (err, result, fields) {
+      res.json({success: 'send succeeded!', url: req.url, result});
+    });
+    con.end();
+  });
+
+  
 });
 
-app.post('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
+app.post('/makeList/*', function(req, res) {
   // Add your code here
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
@@ -91,12 +78,12 @@ app.post('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
 * Example put method *
 ****************************/
 
-app.put('/search/:SearchTerm/:SearchQuery', function(req, res) {
+app.put('/makeList', function(req, res) {
   // Add your code here
   res.json({success: 'put call succeed!', url: req.url, body: req.body})
 });
 
-app.put('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
+app.put('/makeList/*', function(req, res) {
   // Add your code here
   res.json({success: 'put call succeed!', url: req.url, body: req.body})
 });
@@ -105,12 +92,12 @@ app.put('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
 * Example delete method *
 ****************************/
 
-app.delete('/search/:SearchTerm/:SearchQuery', function(req, res) {
+app.delete('/makeList', function(req, res) {
   // Add your code here
   res.json({success: 'delete call succeed!', url: req.url});
 });
 
-app.delete('/search/:SearchTerm/:SearchQuery/*', function(req, res) {
+app.delete('/makeList/*', function(req, res) {
   // Add your code here
   res.json({success: 'delete call succeed!', url: req.url});
 });

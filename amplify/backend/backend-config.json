@@ -1,5 +1,19 @@
 {
   "api": {
+    "makeList": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "makeList"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "search": {
       "dependsOn": [
         {
@@ -44,6 +58,11 @@
     }
   },
   "function": {
+    "makeList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "search": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -51,6 +70,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_makeList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "makeList"
+        }
+      ]
+    },
+    "AMPLIFY_function_makeList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "makeList"
+        }
+      ]
+    },
     "AMPLIFY_function_search_deploymentBucketName": {
       "usedBy": [
         {

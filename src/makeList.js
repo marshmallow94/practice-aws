@@ -1,6 +1,9 @@
-import React from "react";
+import React , {useState} from "react";
 import { Link } from "react-router-dom";
 import "./makeList.css";
+import {API} from "aws-amplify";
+import { useState } from "react";
+import { create } from "handlebars";
 
 /*
 function makeList() {
@@ -10,20 +13,45 @@ function makeList() {
 }
 */
 
+
+
 function makeList() {
+  const [listName, setListName] = useState('');
+  const [listDescription, setListDescription] = useState('');
+  const myInit = {
+    body: {name: listName, description: listDescription}, 
+    headers: {} // OPTIONAL
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    async function createNewList() {
+      try {
+        return await API.post("makeList", "/makeList", myInit);
+
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    createNewList();
+  
+  }
+
+
   return (
     <div class="makelist-area1">
       <div class="makelist-area">
         <div class="makelist-title"> Make your list</div>
         <div class="makelist-content">
           <form className="member-form">
-            <div class="makelist-Fill-Ins">
+            <div class="makelist-Fill-Ins" onSubmit={handleSubmit}>
               <div class="makelistValidation">
                 <label for="m-username">New List name</label>
                 <input
                   type="text"
                   placeholder="Enter your new list name"
                   id="list-name"
+                  value={listName} onChange={(event) => setListName(event.target.value)}
                 />
                 <small>Error message</small>
               </div>
@@ -39,13 +67,15 @@ function makeList() {
               </div>
 
                 <label for="text-entry">Enter List description:</label>
-                <textarea id="text-entry" name="list-description" placeholder="Enter Description" rows="4"></textarea>
+                <textarea id="text-entry" name="list-description" placeholder="Enter Description" rows="4"
+                value={listDescription} onChange={(event) => setListDescription(event.target.value)}
+                ></textarea>
                    
 
             </div>
-            <Link to="/soonPage">
+            
               <button type="submit">Make list</button>
-              </Link>
+              
           </form>
         </div>
       </div>

@@ -18,11 +18,16 @@
       "function": {
         "search": {
           "deploymentBucketName": "amplify-test-dev-20955-deployment",
-          "s3Key": "amplify-builds/search-6b6233545834354f6953-build.zip"
+          "s3Key": "amplify-builds/search-54715571597470375935-build.zip"
+        },
+        "makeList": {
+          "deploymentBucketName": "amplify-test-dev-20955-deployment",
+          "s3Key": "amplify-builds/makeList-78495a3357343033642f-build.zip"
         }
       },
       "api": {
-        "search": {}
+        "search": {},
+        "makeList": {}
       }
     }
   }
