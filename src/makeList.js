@@ -17,6 +17,9 @@ function makeList() {
 function makeList() {
   const [listName, setListName] = useState('');
   const [listDescription, setListDescription] = useState('');
+
+  console.log(listName);
+  console.log(listDescription);
   const myInit = {
     body: {name: listName, description: listDescription}, 
     headers: {} // OPTIONAL
@@ -72,9 +75,9 @@ function makeList() {
                    
 
             </div>
-            
+            <Link to="/makeList">
               <button type="submit">Make list</button>
-              
+              </Link> 
           </form>
         </div>
       </div>
