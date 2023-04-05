@@ -2,7 +2,6 @@ import React , {useState} from "react";
 import { Link } from "react-router-dom";
 import "./makeList.css";
 import {API} from "aws-amplify";
-import { useState } from "react";
 import { create } from "handlebars";
 
 /*
