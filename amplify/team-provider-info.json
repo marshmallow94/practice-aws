@@ -12,9 +12,6 @@
       "AmplifyAppId": "d33smenplucq25"
     },
     "categories": {
-      "auth": {
-        "testec5c516d": {}
-      },
       "function": {
         "search": {
           "deploymentBucketName": "amplify-test-dev-20955-deployment",
