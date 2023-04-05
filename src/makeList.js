@@ -29,6 +29,8 @@ function makeList() {
     event.preventDefault();
     async function createNewList() {
       try {
+        console.log("submitted", listName, listDescription);
+        console.log(myInit);
         return await API.post("makeList", "/makeList", myInit);
 
       } catch (err) {
@@ -45,8 +47,8 @@ function makeList() {
       <div class="makelist-area">
         <div class="makelist-title"> Make your list</div>
         <div class="makelist-content">
-          <form className="member-form">
-            <div class="makelist-Fill-Ins" onSubmit={handleSubmit}>
+          <form className="member-form" onSubmit={handleSubmit}>
+            <div class="makelist-Fill-Ins" >
               <div class="makelistValidation">
                 <label for="m-username">New List name</label>
                 <input
@@ -75,9 +77,9 @@ function makeList() {
                    
 
             </div>
-            <Link to="/makeList">
+            
               <button type="submit">Make list</button>
-              </Link> 
+              
           </form>
         </div>
       </div>
