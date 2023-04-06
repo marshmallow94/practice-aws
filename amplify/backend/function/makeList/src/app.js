@@ -12,6 +12,7 @@ See the License for the specific language governing permissions and limitations 
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const mysql = require('mysql');
 
 // declare a new express app
 const app = express()
@@ -46,9 +47,7 @@ app.get('/makeList/*', function(req, res) {
 
 app.post('/makeList', function(req, res) {
   // Add your code here
-  console.log("yay");
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-  /*
+  
   console.log("reached to post req");
   const result = req.body;
   const mysql = require('mysql');
@@ -61,7 +60,17 @@ app.post('/makeList', function(req, res) {
     port     : 3306
   });
 
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log("reached to connect");
+    con.query("INSERT INTO db.LocationList (name, description, is_public, owner_fk)" +
+      "VALUES ('ListFive','5' , 1, 1);", function (err, result, fields) {
+      res.json({success: 'send succeeded!', url: req.url, result});
+    });
+    con.end();
+  });
   
+  /*
   con.connect(function(err) {
     if (err) throw err;
     console.log("reached to connect");
@@ -70,8 +79,8 @@ app.post('/makeList', function(req, res) {
       res.json({success: 'send succeeded!', url: req.url, result});
     });
     con.end();
-  });
-*/
+  });*/
+
   
 });
 
