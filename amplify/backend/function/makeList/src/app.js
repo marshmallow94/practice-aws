@@ -60,26 +60,16 @@ app.post('/makeList', function(req, res) {
     port     : 3306
   });
 
+
   con.connect(function(err) {
     if (err) throw err;
     console.log("reached to connect");
     con.query("INSERT INTO db.LocationList (name, description, is_public, owner_fk)" +
-      "VALUES ('ListFive','5' , 1, 1);", function (err, result, fields) {
+      "VALUES ('" + result["name"] +"', '" + result["description"] + "', 1, 1);", function (err, result, fields) {
       res.json({success: 'send succeeded!', url: req.url, result});
     });
     con.end();
   });
-  
-  /*
-  con.connect(function(err) {
-    if (err) throw err;
-    console.log("reached to connect");
-    con.query("INSERT INTO db.LocationList (name, description, is_public, owner_fk)" +
-      "VALUES (" + result["name"] +", " + result["description"] + ", 1, 1);", function (err, result, fields) {
-      res.json({success: 'send succeeded!', url: req.url, result});
-    });
-    con.end();
-  });*/
 
   
 });
