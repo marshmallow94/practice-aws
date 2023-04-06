@@ -66,6 +66,9 @@ app.post('/makeList', function(req, res) {
     console.log("reached to connect");
     con.query("INSERT INTO db.LocationList (name, description, is_public, owner_fk)" +
       "VALUES ('" + result["name"] +"', '" + result["description"] + "', 1, 1);", function (err, result, fields) {
+      if (err) {
+        throw err;
+      }
       res.json({success: 'send succeeded!', url: req.url, result});
     });
     con.end();
